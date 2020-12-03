@@ -1,13 +1,12 @@
-set(SRCS ./my_lib/my_lib.cpp)
+add_library(Croissant INTERFACE)
 
+target_sources(Croissant INTERFACE
+               ${CMAKE_CURRENT_LIST_DIR}/Croissant/Comparaison.hpp
+               ${CMAKE_CURRENT_LIST_DIR}/Croissant/Croissant.hpp
+               ${CMAKE_CURRENT_LIST_DIR}/Croissant/Result.hpp
+               ${CMAKE_CURRENT_LIST_DIR}/Croissant/Tags.hpp
+               ${CMAKE_CURRENT_LIST_DIR}/Croissant/Value.hpp)
 
-add_library(my_lib ${SRCS})
+target_compile_features(Croissant INTERFACE cxx_std_20)
 
-target_compile_features(my_lib PUBLIC cxx_std_20)
-
-target_compile_options(my_lib
-                       PRIVATE
-                       $<$<CXX_COMPILER_ID:MSVC>:/W3 /permissive- /TP>
-                       $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>:-Wextra -Wall -Wsign-conversion -Wfloat-equal -pedantic -Wredundant-decls -Wshadow -Wpointer-arith -O3>)
-
-target_include_directories(my_lib PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(Croissant INTERFACE ${CMAKE_CURRENT_LIST_DIR})

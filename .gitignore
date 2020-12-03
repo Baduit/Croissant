@@ -31,10 +31,13 @@
 *.out
 *.app
 
-# Build dirs
+# Build dirs I often use
 build
 build_msvc
 build_gcc
 build_clang
 build_windows
 build_linux
+msvc
+gcc
+clang
