@@ -9,7 +9,6 @@ using namespace boost::ut;
 
 void comparaisons()
 {
-	expect((true) >> fatal) << "If this test fails, the it stops here.";
 	Croissant::Value<int> a(5);
     Croissant::Value<int> b(5);
     Croissant::Value<int> c(6);
@@ -20,11 +19,11 @@ void comparaisons()
 
     expect(bool((a == b == 5))) << "Chained comparaison between a croissant value, an other croissant value and a value";
     expect(bool(!(a == b == 6))) << "Chained comparaison between a croissant value, an other croissant value and a value";
-    expect(bool(!(a == 7 == 5))) << "Chained comparaison between a croissant value, a value and an othervalue";
+    expect(bool(!(a == 7 == 5))) << "Chained comparaison between a croissant value, a value and an other value";
 
-    expect(bool((a == b == a))) << "Chained comparaison between 3 croissant value";
-    expect(bool(!(a == b == c))) << "Chained comparaison between 3 croissant value";
-    expect(bool(!(c == a == b))) << "Chained comparaison between 3 croissant value";
+    expect(bool((a == b == a))) << "Chained comparaison between 3 croissant values";
+    expect(bool(!(a == b == c))) << "Chained comparaison between 3 croissant values";
+    expect(bool(!(c == a == b))) << "Chained comparaison between 3 croissant values";
 }
 
 int main()
