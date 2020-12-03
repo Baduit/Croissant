@@ -1,9 +1,9 @@
 # Croissant
 ## Description
-It is a C++20 header only library make comparaisons more intuitives by chaining it like this :
+It is a C++20 header only library. It makes comparaisons more intuitive by chaining it like this :
 * `x == y == z`
-* `5 < x < 25`
-* `x == y != 12`
+* `5 < x <= 25`
+* `x == y == 12`
 
 But you can only chain comparaisons of the same category (more explanation in the __Limitations__ part). I define 3 categories:
 * Equality : __==__
