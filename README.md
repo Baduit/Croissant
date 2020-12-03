@@ -42,12 +42,14 @@ Also I wanted to experiment to see if could find a synxtax I like better.
 ## Why is it named "Croissant" ?
 I wanted an appetizing name and as a French I can assure you that a croissant is the best thing to eat ever.
 
+## Note
+I use the concepts from the std __std::totally_ordered_with__ and __std::equality_comparable_with__ for simplicity.
+
 ## Todo
-* Implement >= and >
-* Implement < and <=
 * Make it usable in real use case
 * Add user defined literals for numbers, and string_view types
 * More tests
+* Use specifics concepts instead of __std::totally_ordered_with__ and __std::equality_comparable_with__
 * More examples
 * Doc about how it works
 

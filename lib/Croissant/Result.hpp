@@ -10,7 +10,7 @@
 namespace Croissant
 {
 
-// Do not store a Result, the const& can easily become a dangling reference
+// Do not store a Result, the const* can easily become invalid
 template <ComparaisonTag T, typename Value>
 struct Result : public ResultTag
 {

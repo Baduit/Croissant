@@ -2,12 +2,13 @@
 
 #include <Croissant/Result.hpp>
 #include <Croissant/Value.hpp>
+#include <Croissant/UsefulConcepts.hpp>
 
 namespace Croissant
 {
 
 /*
-** Croissant Value equality
+** Croissant Value
 */
 template <typename T, std::equality_comparable_with<T> U>
 constexpr auto operator==(const Value<T>& t, const Value<U>& u)
@@ -28,13 +29,10 @@ constexpr auto operator==(const T& t, const Value<U>& u)
 }
 
 /*
-** Result Equality
+** Result
 */
-template <typename T, typename U>
-concept NotValueComparableWith = NotValue<T> && std::equality_comparable_with<T, U>;
-
 // Note : Result can only be on the left and it is done on purpose, it is not lazyness. If you have a result on the right you are misusing it
-template <typename Left, NotValueComparableWith<Left> Right> 
+template <typename Left, NotValueEqualityComparableWith<Left> Right> 
 constexpr auto operator==(const Result<EqualityTag, Left>& left, const Right& right) -> Result<EqualityTag, Right>
 {
     if (left)
@@ -43,10 +41,7 @@ constexpr auto operator==(const Result<EqualityTag, Left>& left, const Right& ri
         return {};
 }
 
-template <typename T, typename U>
-concept ComparableCroissantWith = IsValue<T> && std::equality_comparable_with<typename T::ValueType, U>;
-
-template <typename Left, ComparableCroissantWith<Left> Right> 
+template <typename Left, EqualityComparableCroissantWith<Left> Right> 
 constexpr auto operator==(const Result<EqualityTag, Left>& left, const Right& right) -> Result<EqualityTag, Right>
 {
     if (left)
