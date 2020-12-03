@@ -12,7 +12,7 @@ struct LessTag {};
 struct MoreTag {};
 
 template <typename T>
-concept ComparaisonTag = std::same_as<T, EqualityTag> || std::same_as<T, LessTag> || std::same_as<T, MoreTag>;
+concept ComparisonTag = std::same_as<T, EqualityTag> || std::same_as<T, LessTag> || std::same_as<T, MoreTag>;
 
 
 struct ResultTag {};

@@ -1,11 +1,11 @@
 # Croissant
 ## Description
-It is a C++20 header only library. It makes comparaisons more intuitive by chaining it like this :
+It is a C++20 header only library. It makes comparisons more intuitive by chaining it like this :
 * `x == y == z`
 * `5 < x <= 25`
 * `x == y == 12`
 
-But you can only chain comparaisons of the same category (more explanation in the __Limitations__ part). I define 3 categories:
+But you can only chain comparisons of the same category (more explanation in the __Limitations__ part). I define 3 categories:
 * Equality : __==__
 * Less : __<__ and __<=__
 * More : __>__ and __>=__
@@ -36,7 +36,7 @@ Also I wanted to experiment to see if could find a synxtax I like better.
 ## Limitations
 * `x == y > 15` : does not work because it is not readable and error prone and my goal is to make less error prone. __==__ is not of the same type as __>__
 * `15 > x < 12` : is not easy to read and __>__ and __<__ are not part of the same catergories.
-* `5 > (x > 1)` : because the the goal is to assemble comparaison you instinctively have in your mind as only one instruction (like x is between 5 and 1, or x, y and same are the same) but if you use parenthèsis like this, it looks like these are separate comparaisons.
+* `5 > (x > 1)` : because the the goal is to assemble comparison you instinctively have in your mind as only one instruction (like x is between 5 and 1, or x, y and same are the same) but if you use parenthèsis like this, it looks like these are separate comparisons.
 * `x == 15 != z` : we don't really know if __z__ must be different from __15__ and from __x__ or if __z__ must be different from __15__ only.
 
 ## Why is it named "Croissant" ?

@@ -1,11 +1,11 @@
 add_library(Croissant INTERFACE)
 
 target_sources(Croissant INTERFACE
-               ${CMAKE_CURRENT_LIST_DIR}/Croissant/EqualityComparaison.hpp
-               ${CMAKE_CURRENT_LIST_DIR}/Croissant/LessComparaison.hpp
-               ${CMAKE_CURRENT_LIST_DIR}/Croissant/LessOrEqualComparaison.hpp
-               ${CMAKE_CURRENT_LIST_DIR}/Croissant/MoreComparaison.hpp
-               ${CMAKE_CURRENT_LIST_DIR}/Croissant/MoreOrEqualComparaison.hpp
+               ${CMAKE_CURRENT_LIST_DIR}/Croissant/EqualityComparison.hpp
+               ${CMAKE_CURRENT_LIST_DIR}/Croissant/LessComparison.hpp
+               ${CMAKE_CURRENT_LIST_DIR}/Croissant/LessOrEqualComparison.hpp
+               ${CMAKE_CURRENT_LIST_DIR}/Croissant/MoreComparison.hpp
+               ${CMAKE_CURRENT_LIST_DIR}/Croissant/MoreOrEqualComparison.hpp
                ${CMAKE_CURRENT_LIST_DIR}/Croissant/Croissant.hpp
                ${CMAKE_CURRENT_LIST_DIR}/Croissant/Result.hpp
                ${CMAKE_CURRENT_LIST_DIR}/Croissant/Tags.hpp

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Croissant/EqualityComparaison.hpp>
-#include <Croissant/MoreComparaison.hpp>
-#include <Croissant/MoreOrEqualComparaison.hpp>
-#include <Croissant/LessComparaison.hpp>
-#include <Croissant/LessOrEqualComparaison.hpp>
+#include <Croissant/EqualityComparison.hpp>
+#include <Croissant/MoreComparison.hpp>
+#include <Croissant/MoreOrEqualComparison.hpp>
+#include <Croissant/LessComparison.hpp>
+#include <Croissant/LessOrEqualComparison.hpp>
 
 namespace Croissant
 {

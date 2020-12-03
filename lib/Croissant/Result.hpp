@@ -11,7 +11,7 @@ namespace Croissant
 {
 
 // Do not store a Result, the const* can easily become invalid
-template <ComparaisonTag T, typename Value>
+template <ComparisonTag T, typename Value>
 struct Result : public ResultTag
 {
     using Tag = T;
