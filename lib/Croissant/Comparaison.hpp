@@ -9,7 +9,7 @@ namespace Croissant
 /*
 ** Croissant Value equality
 */
-template <typename T, typename U> requires std::equality_comparable_with<T, U>
+template <typename T, std::equality_comparable_with<T> U>
 constexpr auto operator==(const Value<T>& t, const Value<U>& u)
 {
     return Result<EqualityTag, U>(u.value, t.value == u.value);
