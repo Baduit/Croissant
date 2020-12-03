@@ -8,19 +8,24 @@
 #include <Croissant/Result.hpp>
 #include <Croissant/Tags.hpp>
 
+namespace Croissant
+{
+
 template <typename T>
-struct CroissantValue: public CroissantValueTag
+struct Value: public ValueTag
 {
     using ValueType = T;
 
-    constexpr explicit CroissantValue(ValueType&& t):
+    constexpr explicit Value(ValueType&& t):
         value(std::move(t))
     {}
 
-    constexpr explicit CroissantValue(const ValueType& t):
+    constexpr explicit Value(const ValueType& t):
         value(t)
     {}
 
     ValueType value;
 };
+
+} // namespace Croissant
 

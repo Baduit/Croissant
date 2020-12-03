@@ -10,9 +10,9 @@ using namespace boost::ut;
 void comparaisons()
 {
 	expect((true) >> fatal) << "If this test fails, the it stops here.";
-	CroissantValue<int> a(5);
-    CroissantValue<int> b(5);
-    CroissantValue<int> c(6);
+	Croissant::Value<int> a(5);
+    Croissant::Value<int> b(5);
+    Croissant::Value<int> c(6);
     
     expect(bool(a == b)) << "Simple comparaison between 2 croissant value";
     expect(bool(5 == a)) << "Simple comparaison between a value and a croissant value";

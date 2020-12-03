@@ -9,8 +9,8 @@
 
 int main()
 {
-    CroissantValue<int> a(5);
-    CroissantValue<int> b(5);
+    Croissant::Value<int> a(5);
+    Croissant::Value<int> b(5);
 
     if (a == b == 5)
         std::cout << "true" << std::endl;

@@ -7,6 +7,9 @@
 
 #include <Croissant/Tags.hpp>
 
+namespace Croissant
+{
+
 // Do not store a Result, the const& can easily become a dangling reference
 template <ComparaisonTag T, typename Value>
 struct Result : public ResultTag
@@ -25,3 +28,5 @@ struct Result : public ResultTag
     const Value* value = nullptr;
     bool res = false;
 };
+
+} // namespace Croissant
