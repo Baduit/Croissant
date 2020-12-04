@@ -36,7 +36,7 @@ Also I wanted to experiment to see if could find a synxtax I like better.
 ## Limitations
 * `x == y > 15` : does not work because it is not readable and error prone and my goal is to make less error prone. __==__ is not of the same type as __>__
 * `15 > x < 12` : is not easy to read and __>__ and __<__ are not part of the same catergories.
-* `5 > (x > 1)` : because the the goal is to assemble comparison you instinctively have in your mind as only one instruction (like x is between 5 and 1, or x, y and same are the same) but if you use parenthèsis like this, it looks like these are separate comparisons.
+* `5 > (x > 1)` : because the goal is to assemble comparison you instinctively have in your mind as only one instruction (like x is between 5 and 1, or x, y and same are the same) but if you use parenthèsis like this, it looks like these are separate comparisons.
 * `x == 15 != z` : we don't really know if __z__ must be different from __15__ and from __x__ or if __z__ must be different from __15__ only.
 
 ## Why is it named "Croissant" ?
