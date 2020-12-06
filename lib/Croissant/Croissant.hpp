@@ -6,6 +6,8 @@
 #include <Croissant/LessComparison.hpp>
 #include <Croissant/LessOrEqualComparison.hpp>
 
+#include <Croissant/Number.hpp>
+
 namespace Croissant
 {
 

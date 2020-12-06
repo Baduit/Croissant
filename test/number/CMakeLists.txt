@@ -1,0 +1,1 @@
+addTest(number number_test.cpp)
