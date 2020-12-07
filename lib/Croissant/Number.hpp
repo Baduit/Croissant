@@ -3,11 +3,10 @@
 #include <concepts>
 #include <compare>
 
+#include <Croissant/OperatorsConcept.hpp>
+
 namespace Croissant
 {
-
-template <typename T>
-concept NumberBuiltin = std::integral<T> || std::floating_point<T>;
 
 template <typename A, typename R>
 concept CanBeConstructTo =
@@ -23,11 +22,21 @@ concept CanBeAssignTo =
 		{ r = a };
 	};
 
+template <typename T, typename U, typename F>
+concept OperatorCompatible =
+	requires(T t, U u, F f)
+	{
+		f(t, u);
+	};
+
 template <NumberBuiltin N>
 struct NumberBase
 {
 	using ValueType = N;
 
+	/*
+	** Constructor and assigment
+	*/
 	NumberBase() = default;
 
 	NumberBase(const NumberBase&) = default;
@@ -49,11 +58,59 @@ struct NumberBase
 		return *this;
 	}
 
+	/*
+	** Access underlying value
+	*/
+	ValueType& get() { return value; }
+	ValueType get() const { return value; }
+
+	ValueType& operator*() { return value; }
+	ValueType operator*() const { return value; }
+
+	/*
+	** Comparison operators
+	*/
 	bool operator==(const NumberBase&) const = default;
 	auto operator<=>(const NumberBase&) const = default;
 
+	/*
+	** Arithmetic assigment operators
+	*/
+
+	/*
+	** Bitwise assigment operators
+	*/
+
+	/*
+	** Shift assigment operators
+	*/
 
 	ValueType value = {};
 };
+
+/*
+** Arithmetic operators
+*/
+template <typename T, AddCompatible<T> U>
+auto operator+(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t + *u)>(*t + *u); }
+
+template <typename T, AddCompatible<T> U>
+auto operator+(NumberBase<T> t, U u) { return NumberBase<decltype(*t + u)>(*t + u); }
+
+template <typename T, AddCompatible<T> U>
+auto operator+(T t, NumberBase<U> u) { return NumberBase<decltype(t + *u)>(t + *u); }
+
+/*
+** Bitwise operators
+*/
+
+/*
+** Logical operators
+*/
+
+
+/*
+** Shift operators
+*/
 
 } // namespace Croissant
