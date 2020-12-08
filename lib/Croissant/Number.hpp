@@ -78,6 +78,45 @@ struct NumberBase
 	/*
 	** Arithmetic assigment operators
 	*/
+	// +=
+	template <AddAssigmentCompatible<ValueType> U>
+	auto operator+=(NumberBase<U> u) { value += u.value; return *this; }
+
+	template <AddAssigmentCompatible<ValueType> U>
+	auto operator+=(U u) { value += u; return *this;  }
+
+
+	// -=
+	template <LessAssigmentCompatible<ValueType> U>
+	auto operator-=(NumberBase<U> u) { value -= u.value; return *this;  }
+
+	template <LessAssigmentCompatible<ValueType> U>
+	auto operator-=(U u) { value -= u; return *this;  }
+
+
+	// *=
+	template <MultiplyAssigmentCompatible<ValueType> U>
+	auto operator*=(NumberBase<U> u) { value *= u.value; return *this;  }
+
+	template <MultiplyAssigmentCompatible<ValueType> U>
+	auto operator*=(U u) { return value *= u; return *this;  }
+
+
+	// /=
+	template <DivideAssigmentCompatible<ValueType> U>
+	auto operator/=(NumberBase<U> u) { value /= u.value; return *this;  }
+
+	template <DivideAssigmentCompatible<ValueType> U>
+	auto operator/=(U u) { value /= u; return *this;  }
+
+
+	// %=
+	template <ModuloAssigmentCompatible<ValueType> U>
+	auto operator%=(NumberBase<U> u) { value %= u.value; return *this;  }
+
+	template < ModuloAssigmentCompatible<ValueType> U>
+	auto operator%=(U u) { value %= u; return *this;  }
+
 
 	/*
 	** Bitwise assigment operators
