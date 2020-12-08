@@ -72,8 +72,6 @@ struct NumberBase
 	*/
 	bool operator==(const NumberBase&) const = default;
 	auto operator<=>(const NumberBase&) const = default;
-
-	// TODO: make it comparable with anything that can be compared with the underlying value
 	
 	/*
 	** Arithmetic assigment operators
@@ -164,6 +162,35 @@ struct NumberBase
 
 	ValueType value = {};
 };
+
+/*
+** Comparison operators
+*/
+// == (and normally != automatically)
+/* template <typename T, std::equality_comparable_with<T> U>
+bool operator==(const U& left, const NumberBase<T>& right)
+{
+	return right.value == left;
+}
+
+template <typename T, std::equality_comparable_with<T> U>
+auto operator==(const NumberBase<T>& left, const U& right)
+{
+	return right == left.value;
+}
+
+// <=>
+template <typename T, std::totally_ordered_with<T> U>
+bool operator<=>(const U& left, const NumberBase<T>& right)
+{
+	return right.value <=> left;
+}
+
+template <typename T, std::totally_ordered_with<T> U>
+auto operator<=>(const NumberBase<T>& left, const U& right)
+{
+	return right <=> left.value;
+} */
 
 /*
 ** Arithmetic operators
