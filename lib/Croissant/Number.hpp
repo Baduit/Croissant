@@ -72,7 +72,7 @@ struct NumberBase
 	*/
 	bool operator==(const NumberBase&) const = default;
 	auto operator<=>(const NumberBase&) const = default;
-
+	
 	/*
 	** Arithmetic assigment operators
 	*/
@@ -100,6 +100,48 @@ auto operator+(NumberBase<T> t, U u) { return NumberBase<decltype(*t + u)>(*t + 
 template <typename T, AddCompatible<T> U>
 auto operator+(T t, NumberBase<U> u) { return NumberBase<decltype(t + *u)>(t + *u); }
 
+
+template <typename T, LessCompatible<T> U>
+auto operator-(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t - *u)>(*t - *u); }
+
+template <typename T, LessCompatible<T> U>
+auto operator-(NumberBase<T> t, U u) { return NumberBase<decltype(*t - u)>(*t - u); }
+
+template <typename T, LessCompatible<T> U>
+auto operator-(T t, NumberBase<U> u) { return NumberBase<decltype(t - *u)>(t - *u); }
+
+
+template <typename T, MultiplyCompatible<T> U>
+auto operator*(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t * *u)>(*t * *u); }
+
+template <typename T, MultiplyCompatible<T> U>
+auto operator*(NumberBase<T> t, U u) { return NumberBase<decltype(*t * u)>(*t * u); }
+
+template <typename T, MultiplyCompatible<T> U>
+auto operator*(T t, NumberBase<U> u) { return NumberBase<decltype(t * *u)>(t * *u); }
+
+
+template <typename T, DivideCompatible<T> U>
+auto operator/(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t / *u)>(*t / *u); }
+
+template <typename T, DivideCompatible<T> U>
+auto operator/(NumberBase<T> t, U u) { return NumberBase<decltype(*t / u)>(*t / u); }
+
+template <typename T, DivideCompatible<T> U>
+auto operator/(T t, NumberBase<U> u) { return NumberBase<decltype(t / *u)>(t / *u); }
+
+
+template <typename T, ModuloCompatible<T> U>
+auto operator%(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t % *u)>(*t % *u); }
+
+template <typename T, ModuloCompatible<T> U>
+auto operator%(NumberBase<T> t, U u) { return NumberBase<decltype(*t % u)>(*t % u); }
+
+template <typename T, ModuloCompatible<T> U>
+auto operator%(T t, NumberBase<U> u) { return NumberBase<decltype(t % *u)>(t % *u); }
+
+template <NegateCompatible T>
+auto operator-(NumberBase<T> t) { return NumberBase<T>(-(*t)); }
 /*
 ** Bitwise operators
 */
