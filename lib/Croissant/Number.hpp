@@ -121,10 +121,46 @@ struct NumberBase
 	/*
 	** Bitwise assigment operators
 	*/
+	// &=
+	template <BitAndAssigmentCompatible<ValueType> U>
+	auto operator&=(NumberBase<U> u) { value &= u.value; return *this;  }
+
+	template <BitAndAssigmentCompatible<ValueType> U>
+	auto operator&=(U u) { return value &= u; return *this;  }
+
+
+	// |=
+	template <BitOrAssigmentCompatible<ValueType> U>
+	auto operator|=(NumberBase<U> u) { value |= u.value; return *this;  }
+
+	template <BitOrAssigmentCompatible<ValueType> U>
+	auto operator|=(U u) { value |= u; return *this;  }
+
+
+	// ^=
+	template <BitXorAssigmentCompatible<ValueType> U>
+	auto operator^=(NumberBase<U> u) { value ^= u.value; return *this;  }
+
+	template < BitXorAssigmentCompatible<ValueType> U>
+	auto operator^=(U u) { value ^= u; return *this;  }
 
 	/*
 	** Shift assigment operators
 	*/
+	// >>=
+	template <ShiftRightAssigmentCompatible<ValueType> U>
+	auto operator>>=(NumberBase<U> u) { value >>= u.value; return *this;  }
+
+	template <ShiftRightAssigmentCompatible<ValueType> U>
+	auto operator>>=(U u) { value >>= u; return *this;  }
+
+
+	// <<=
+	template <ShiftLeftAssigmentCompatible<ValueType> U>
+	auto operator<<=(NumberBase<U> u) { value <<= u.value; return *this;  }
+
+	template < ShiftLeftAssigmentCompatible<ValueType> U>
+	auto operator<<=(U u) { value <<= u; return *this;  }
 
 	ValueType value = {};
 };
