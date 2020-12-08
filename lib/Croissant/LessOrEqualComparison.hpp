@@ -13,19 +13,19 @@ namespace Croissant
 template <typename T, std::totally_ordered_with<T> U>
 constexpr auto operator<=(const Value<T>& t, const Value<U>& u)
 {
-    return Result<LessTag, U>(u.value, t.value <= u.value);
+	return Result<LessTag, U>(u.value, t.value <= u.value);
 }
 
 template <NotValueNorResult U, std::totally_ordered_with<U> T>
 constexpr auto operator<=(const Value<T>& t, const U& u)
 {
-    return Result<LessTag, U>(u, t.value <= u);
+	return Result<LessTag, U>(u, t.value <= u);
 }
 
 template <NotValueNorResult T, std::totally_ordered_with<T> U> 
 constexpr auto operator<=(const T& t, const Value<U>& u)
 {
-    return Result<LessTag, U>(u.value, t <= u.value);
+	return Result<LessTag, U>(u.value, t <= u.value);
 }
 
 /*
@@ -35,19 +35,19 @@ constexpr auto operator<=(const T& t, const Value<U>& u)
 template <typename Left, NotValueOrderedWith<Left> Right> 
 constexpr auto operator<=(const Result<LessTag, Left>& left, const Right& right) -> Result<LessTag, Right>
 {
-    if (left)
-        return Result<LessTag, Right>(right, *(left.value) <= right);
-    else
-        return {};
+	if (left)
+		return Result<LessTag, Right>(right, *(left.value) <= right);
+	else
+		return {};
 }
 
 template <typename Left, OrderedCroissantWith<Left> Right> 
 constexpr auto operator<=(const Result<LessTag, Left>& left, const Right& right) -> Result<LessTag, Right>
 {
-    if (left)
-        return Result<LessTag, Right>(right, *(left.value) <= right.value);
-    else
-        return {};
+	if (left)
+		return Result<LessTag, Right>(right, *(left.value) <= right.value);
+	else
+		return {};
 }
 
 } // namespace Croissant

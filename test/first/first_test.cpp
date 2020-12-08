@@ -7,7 +7,7 @@
 
 using namespace boost::ut;
 
-void equality()
+/* void equality()
 {
 	Croissant::Value<int> a(5);
     Croissant::Value<int> b(5);
@@ -46,11 +46,11 @@ void less()
     expect(!bool(c < b < a));
     expect(bool(a < b));
     expect(bool(5 <= b < 10));
-}
+} */
 
 int main()
 {
-	"equality"_test = equality;
+	/* "equality"_test = equality;
     "more"_test = more;
-    "less"_test = less;
+    "less"_test = less; */
 }

@@ -164,35 +164,6 @@ struct NumberBase
 };
 
 /*
-** Comparison operators
-*/
-// == (and normally != automatically)
-/* template <typename T, std::equality_comparable_with<T> U>
-bool operator==(const U& left, const NumberBase<T>& right)
-{
-	return right.value == left;
-}
-
-template <typename T, std::equality_comparable_with<T> U>
-auto operator==(const NumberBase<T>& left, const U& right)
-{
-	return right == left.value;
-}
-
-// <=>
-template <typename T, std::totally_ordered_with<T> U>
-bool operator<=>(const U& left, const NumberBase<T>& right)
-{
-	return right.value <=> left;
-}
-
-template <typename T, std::totally_ordered_with<T> U>
-auto operator<=>(const NumberBase<T>& left, const U& right)
-{
-	return right <=> left.value;
-} */
-
-/*
 ** Arithmetic operators
 */
 // +
