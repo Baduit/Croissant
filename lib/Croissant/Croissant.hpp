@@ -12,6 +12,9 @@
 
 namespace Croissant
 {
+/*
+** Aliases
+*/
 
 using Int = Value<int>;
 using UInt = Value<unsigned int>;
@@ -37,5 +40,28 @@ using Double = Value<double>;
 
 using StringView = Value<std::string_view>;
 using String = Value<std::string>;
+
+/*
+** Literals
+*/ 
+/* String operator"" _s(const char* str, std::size_t size)
+{
+    return String(str, size);
+} */
+
+namespace StringLiterals
+{
+
+inline String operator"" _s(const char* str, std::size_t size)
+{
+    return String(str, size);
+}
+
+inline consteval StringView operator"" _sv(const char* str, std::size_t size)
+{
+    return StringView(str, size);
+}
+
+}
 
 } // namespace Croissant

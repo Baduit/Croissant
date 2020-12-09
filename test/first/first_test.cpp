@@ -63,10 +63,27 @@ void construction_and_assigment()
     }
 }
 
+void string_literals()
+{
+    using namespace Croissant::StringLiterals;
+    {
+        auto strv1 = "Salut moi c'est Lena"_sv;
+        auto str2 = "Salut moi c'est Lena"_s;
+        auto strv3 = "Salut moi c'est Lena"_sv;
+        auto strv4 = "Salut moi c'est pas Lena"_sv;
+
+        expect(bool(strv1 == str2));
+        expect(!bool(strv1 == strv4));
+        expect(bool(strv1 == str2 == strv3));
+        expect(!bool(strv1 == str2 == strv4));
+    }
+}
+
 int main()
 {
 	"equality"_test = equality;
     "more"_test = more;
     "less"_test = less;
     "construction_and_assigment"_test = construction_and_assigment;
+    "literals"_test = string_literals;
 }

@@ -30,13 +30,13 @@ struct Value: public ValueTag
 {
     using ValueType = T;
 
-    Value() = default;
+    constexpr Value() = default;
 
-    Value(const Value&) = default;
-    Value& operator=(const Value&) = default;
+    constexpr Value(const Value&) = default;
+    constexpr Value& operator=(const Value&) = default;
 
-    Value(Value&&) = default;
-    Value& operator=(Value&&) = default;
+    constexpr Value(Value&&) = default;
+    constexpr Value& operator=(Value&&) = default;
 
     template <typename... Args> requires ConstructibleFrom<T, Args...>
     constexpr explicit(Explicit) Value(Args&&... args):
@@ -44,20 +44,20 @@ struct Value: public ValueTag
     {}
 
     template <typename U> requires AssignableFrom<T, U>
-    Value& operator=(U&& other)
+    constexpr Value& operator=(U&& other)
     {
         value = std::forward<U>(other);
         return *this;
     }
 
-    T& operator*() { return value; }
-    const T& operator*() const { return value; }
+    constexpr T& operator*() { return value; }
+    constexpr const T& operator*() const { return value; }
 
-    T& get_value() { return value; }
-    const T& get_value() const { return value; }
+    constexpr T& get_value() { return value; }
+    constexpr const T& get_value() const { return value; }
 
-    T* operator->() { return &value; }
-    const T* operator->() const { return &value; }
+    constexpr T* operator->() { return &value; }
+    constexpr const T* operator->() const { return &value; }
 
 
     ValueType value;
