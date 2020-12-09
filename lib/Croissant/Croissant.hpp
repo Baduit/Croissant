@@ -1,5 +1,9 @@
 #pragma once
 
+#include <cstdint>
+#include <string_view>
+#include <string>
+
 #include <Croissant/EqualityComparison.hpp>
 #include <Croissant/MoreComparison.hpp>
 #include <Croissant/MoreOrEqualComparison.hpp>
@@ -9,6 +13,29 @@
 namespace Croissant
 {
 
-// Todo add some utility stuff
+using Int = Value<int>;
+using UInt = Value<unsigned int>;
+
+using Int8 = Value<int8_t>;
+using UInt8 = Value<uint8_t>;
+
+using Int16 = Value<int16_t>;
+using UInt16 = Value<uint16_t>;
+
+using Int32 = Value<int32_t>;
+using UInt32 = Value<uint32_t>;
+
+using Int64 = Value<int64_t>;
+using UInt64 = Value<uint64_t>;
+
+using Size = Value<std::size_t>;
+// Does not seems to be supported yet
+//using SSize = Value<std::ssize_t>;
+
+using Float = Value<float>;
+using Double = Value<double>;
+
+using StringView = Value<std::string_view>;
+using String = Value<std::string>;
 
 } // namespace Croissant
