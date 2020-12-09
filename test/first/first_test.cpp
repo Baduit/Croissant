@@ -1,6 +1,7 @@
 #include <iostream>
 #include <utility>
 #include <cassert>
+#include <string>
 
 #include <boost_ut/ut.hpp>
 #include <Croissant/Croissant.hpp>
@@ -48,9 +49,24 @@ void less()
     expect(bool(5 <= b < 10));
 }
 
+struct StructForTest {};
+
+void construction_and_assigment()
+{
+    {
+        Croissant::Value<std::string> str;
+        str = "lol";
+    }
+    {
+        std::size_t size = 2;
+        Croissant::Value<std::string> str("lol", size);
+    }
+}
+
 int main()
 {
 	"equality"_test = equality;
     "more"_test = more;
     "less"_test = less;
+    "construction_and_assigment"_test = construction_and_assigment;
 }
