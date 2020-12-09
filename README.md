@@ -159,6 +159,13 @@ I made the comparison operators return an object containing a boolean with the r
 
 Also there is an explicit conversion operator to bool so it works in a condition.
 
+
+## How to integrate it ?
+It is a header only library, you can use it by:
+- Use CMake and link against it : `target_link_libraries(your_target Croissant)` (It is defined as an INTERFACE library)
+- Add in your project the single header __Croissant.hpp__ which is in the folder __single_header__
+- Add the lib directory in your path and include <Croissant/Croissant.hpp>
+
 ## Limitations
 * `x == y > 15` : does not work because it is not readable and error prone and my goal is to make less error prone. __==__ is not of the same type as __>__
 * `15 > x < 12` : is not easy to read and __>__ and __<__ are not part of the same catergories.
