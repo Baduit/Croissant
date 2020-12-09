@@ -14,19 +14,19 @@ namespace Croissant
 template <ComparisonTag T, typename Value>
 struct Result : public ResultTag
 {
-    using Tag = T;
+	using Tag = T;
 
-    constexpr Result() = default;
+	constexpr Result() = default;
 
-    constexpr Result(const Value& v, bool b):
-        value(&v),
-        res(b)
-    {}
+	constexpr Result(const Value& v, bool b):
+		value(&v),
+		res(b)
+	{}
 
-    constexpr explicit operator bool () const { return res; }
+	constexpr explicit operator bool () const { return res; }
 
-    const Value* value = nullptr;
-    bool res = false;
+	const Value* value = nullptr;
+	bool res = false;
 };
 
 } // namespace Croissant
