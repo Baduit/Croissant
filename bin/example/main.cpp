@@ -9,8 +9,11 @@
 
 int main()
 {
-    Croissant::Value<int> a(5);
-    Croissant::Value<int> b(6);
+    using namespace Croissant;
+    using namespace Croissant::IntegerLiterals;
+
+    Int a = 5;
+    auto b = 6_i;
 
     if (a < b <= 6)
         std::cout << "true" << std::endl;
