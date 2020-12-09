@@ -4,6 +4,7 @@
 #include <compare>
 
 #include <Croissant/OperatorsConcept.hpp>
+#include <Croissant/Tags.hpp>
 
 namespace Croissant
 {
@@ -30,29 +31,29 @@ concept OperatorCompatible =
 	};
 
 template <NumberBuiltin N>
-struct NumberBase
+struct Value: public ValueTag
 {
 	using ValueType = N;
 
 	/*
 	** Constructor and assigment
 	*/
-	NumberBase() = default;
+	Value() = default;
 
-	NumberBase(const NumberBase&) = default;
-	NumberBase& operator=(const NumberBase&) = default;
+	Value(const Value&) = default;
+	Value& operator=(const Value&) = default;
 
-	NumberBase(NumberBase&&) = default;
-	NumberBase& operator=(NumberBase&&) = default;
+	Value(Value&&) = default;
+	Value& operator=(Value&&) = default;
 
 
 	template <CanBeConstructTo<ValueType> T>
-	NumberBase(T n):
+	Value(T n):
 		value(n)
 	{}
 
 	template <CanBeAssignTo<ValueType> T>
-	NumberBase& operator=(T n)
+	Value& operator=(T n)
 	{
 		value = n;
 		return *this;
@@ -66,19 +67,13 @@ struct NumberBase
 
 	ValueType& operator*() { return value; }
 	ValueType operator*() const { return value; }
-
-	/*
-	** Comparison operators
-	*/
-	bool operator==(const NumberBase&) const = default;
-	auto operator<=>(const NumberBase&) const = default;
 	
 	/*
 	** Arithmetic assigment operators
 	*/
 	// +=
 	template <AddAssigmentCompatible<ValueType> U>
-	auto operator+=(NumberBase<U> u) { value += u.value; return *this; }
+	auto operator+=(Value<U> u) { value += u.value; return *this; }
 
 	template <AddAssigmentCompatible<ValueType> U>
 	auto operator+=(U u) { value += u; return *this;  }
@@ -86,7 +81,7 @@ struct NumberBase
 
 	// -=
 	template <LessAssigmentCompatible<ValueType> U>
-	auto operator-=(NumberBase<U> u) { value -= u.value; return *this;  }
+	auto operator-=(Value<U> u) { value -= u.value; return *this;  }
 
 	template <LessAssigmentCompatible<ValueType> U>
 	auto operator-=(U u) { value -= u; return *this;  }
@@ -94,7 +89,7 @@ struct NumberBase
 
 	// *=
 	template <MultiplyAssigmentCompatible<ValueType> U>
-	auto operator*=(NumberBase<U> u) { value *= u.value; return *this;  }
+	auto operator*=(Value<U> u) { value *= u.value; return *this;  }
 
 	template <MultiplyAssigmentCompatible<ValueType> U>
 	auto operator*=(U u) { return value *= u; return *this;  }
@@ -102,7 +97,7 @@ struct NumberBase
 
 	// /=
 	template <DivideAssigmentCompatible<ValueType> U>
-	auto operator/=(NumberBase<U> u) { value /= u.value; return *this;  }
+	auto operator/=(Value<U> u) { value /= u.value; return *this;  }
 
 	template <DivideAssigmentCompatible<ValueType> U>
 	auto operator/=(U u) { value /= u; return *this;  }
@@ -110,7 +105,7 @@ struct NumberBase
 
 	// %=
 	template <ModuloAssigmentCompatible<ValueType> U>
-	auto operator%=(NumberBase<U> u) { value %= u.value; return *this;  }
+	auto operator%=(Value<U> u) { value %= u.value; return *this;  }
 
 	template < ModuloAssigmentCompatible<ValueType> U>
 	auto operator%=(U u) { value %= u; return *this;  }
@@ -121,7 +116,7 @@ struct NumberBase
 	*/
 	// &=
 	template <BitAndAssigmentCompatible<ValueType> U>
-	auto operator&=(NumberBase<U> u) { value &= u.value; return *this;  }
+	auto operator&=(Value<U> u) { value &= u.value; return *this;  }
 
 	template <BitAndAssigmentCompatible<ValueType> U>
 	auto operator&=(U u) { return value &= u; return *this;  }
@@ -129,7 +124,7 @@ struct NumberBase
 
 	// |=
 	template <BitOrAssigmentCompatible<ValueType> U>
-	auto operator|=(NumberBase<U> u) { value |= u.value; return *this;  }
+	auto operator|=(Value<U> u) { value |= u.value; return *this;  }
 
 	template <BitOrAssigmentCompatible<ValueType> U>
 	auto operator|=(U u) { value |= u; return *this;  }
@@ -137,7 +132,7 @@ struct NumberBase
 
 	// ^=
 	template <BitXorAssigmentCompatible<ValueType> U>
-	auto operator^=(NumberBase<U> u) { value ^= u.value; return *this;  }
+	auto operator^=(Value<U> u) { value ^= u.value; return *this;  }
 
 	template < BitXorAssigmentCompatible<ValueType> U>
 	auto operator^=(U u) { value ^= u; return *this;  }
@@ -147,7 +142,7 @@ struct NumberBase
 	*/
 	// >>=
 	template <ShiftRightAssigmentCompatible<ValueType> U>
-	auto operator>>=(NumberBase<U> u) { value >>= u.value; return *this;  }
+	auto operator>>=(Value<U> u) { value >>= u.value; return *this;  }
 
 	template <ShiftRightAssigmentCompatible<ValueType> U>
 	auto operator>>=(U u) { value >>= u; return *this;  }
@@ -155,7 +150,7 @@ struct NumberBase
 
 	// <<=
 	template <ShiftLeftAssigmentCompatible<ValueType> U>
-	auto operator<<=(NumberBase<U> u) { value <<= u.value; return *this;  }
+	auto operator<<=(Value<U> u) { value <<= u.value; return *this;  }
 
 	template < ShiftLeftAssigmentCompatible<ValueType> U>
 	auto operator<<=(U u) { value <<= u; return *this;  }
@@ -164,143 +159,155 @@ struct NumberBase
 };
 
 /*
+** Diff
+*/
+template <typename T, DiffCompatible<T> U>
+auto operator!=(Value<T> t, Value<U> u) { return (*t != *u); }
+
+template <typename T, DiffCompatible<T> U>
+auto operator!=(Value<T> t, U u) { return (*t != u); }
+
+template <typename T, DiffCompatible<T> U>
+auto operator!=(T t, Value<U> u) { return (t != *u); }
+
+/*
 ** Arithmetic operators
 */
 // +
 template <typename T, AddCompatible<T> U>
-auto operator+(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t + *u)>(*t + *u); }
+auto operator+(Value<T> t, Value<U> u) { return Value<decltype(*t + *u)>(*t + *u); }
 
 template <typename T, AddCompatible<T> U>
-auto operator+(NumberBase<T> t, U u) { return NumberBase<decltype(*t + u)>(*t + u); }
+auto operator+(Value<T> t, U u) { return Value<decltype(*t + u)>(*t + u); }
 
 template <typename T, AddCompatible<T> U>
-auto operator+(T t, NumberBase<U> u) { return NumberBase<decltype(t + *u)>(t + *u); }
+auto operator+(T t, Value<U> u) { return Value<decltype(t + *u)>(t + *u); }
 
 // -
 template <typename T, LessCompatible<T> U>
-auto operator-(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t - *u)>(*t - *u); }
+auto operator-(Value<T> t, Value<U> u) { return Value<decltype(*t - *u)>(*t - *u); }
 
 template <typename T, LessCompatible<T> U>
-auto operator-(NumberBase<T> t, U u) { return NumberBase<decltype(*t - u)>(*t - u); }
+auto operator-(Value<T> t, U u) { return Value<decltype(*t - u)>(*t - u); }
 
 template <typename T, LessCompatible<T> U>
-auto operator-(T t, NumberBase<U> u) { return NumberBase<decltype(t - *u)>(t - *u); }
+auto operator-(T t, Value<U> u) { return Value<decltype(t - *u)>(t - *u); }
 
 // *
 template <typename T, MultiplyCompatible<T> U>
-auto operator*(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t * *u)>(*t * *u); }
+auto operator*(Value<T> t, Value<U> u) { return Value<decltype(*t * *u)>(*t * *u); }
 
 template <typename T, MultiplyCompatible<T> U>
-auto operator*(NumberBase<T> t, U u) { return NumberBase<decltype(*t * u)>(*t * u); }
+auto operator*(Value<T> t, U u) { return Value<decltype(*t * u)>(*t * u); }
 
 template <typename T, MultiplyCompatible<T> U>
-auto operator*(T t, NumberBase<U> u) { return NumberBase<decltype(t * *u)>(t * *u); }
+auto operator*(T t, Value<U> u) { return Value<decltype(t * *u)>(t * *u); }
 
 // /
 template <typename T, DivideCompatible<T> U>
-auto operator/(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t / *u)>(*t / *u); }
+auto operator/(Value<T> t, Value<U> u) { return Value<decltype(*t / *u)>(*t / *u); }
 
 template <typename T, DivideCompatible<T> U>
-auto operator/(NumberBase<T> t, U u) { return NumberBase<decltype(*t / u)>(*t / u); }
+auto operator/(Value<T> t, U u) { return Value<decltype(*t / u)>(*t / u); }
 
 template <typename T, DivideCompatible<T> U>
-auto operator/(T t, NumberBase<U> u) { return NumberBase<decltype(t / *u)>(t / *u); }
+auto operator/(T t, Value<U> u) { return Value<decltype(t / *u)>(t / *u); }
 
 // %
 template <typename T, ModuloCompatible<T> U>
-auto operator%(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t % *u)>(*t % *u); }
+auto operator%(Value<T> t, Value<U> u) { return Value<decltype(*t % *u)>(*t % *u); }
 
 template <typename T, ModuloCompatible<T> U>
-auto operator%(NumberBase<T> t, U u) { return NumberBase<decltype(*t % u)>(*t % u); }
+auto operator%(Value<T> t, U u) { return Value<decltype(*t % u)>(*t % u); }
 
 template <typename T, ModuloCompatible<T> U>
-auto operator%(T t, NumberBase<U> u) { return NumberBase<decltype(t % *u)>(t % *u); }
+auto operator%(T t, Value<U> u) { return Value<decltype(t % *u)>(t % *u); }
 
 // -
 template <NegateCompatible T>
-auto operator-(NumberBase<T> t) { return NumberBase<T>(-(*t)); }
+auto operator-(Value<T> t) { return Value<T>(-(*t)); }
 
 /*
 ** Bitwise operators
 */
 // &
 template <typename T, BitAndCompatible<T> U>
-auto operator&(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t & *u)>(*t & *u); }
+auto operator&(Value<T> t, Value<U> u) { return Value<decltype(*t & *u)>(*t & *u); }
 
 template <typename T, BitAndCompatible<T> U>
-auto operator&(NumberBase<T> t, U u) { return NumberBase<decltype(*t & u)>(*t & u); }
+auto operator&(Value<T> t, U u) { return Value<decltype(*t & u)>(*t & u); }
 
 template <typename T, BitAndCompatible<T> U>
-auto operator&(T t, NumberBase<U> u) { return NumberBase<decltype(t & *u)>(t & *u); }
+auto operator&(T t, Value<U> u) { return Value<decltype(t & *u)>(t & *u); }
 
 // |
 template <typename T, BitOrCompatible<T> U>
-auto operator|(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t | *u)>(*t | *u); }
+auto operator|(Value<T> t, Value<U> u) { return Value<decltype(*t | *u)>(*t | *u); }
 
 template <typename T, BitOrCompatible<T> U>
-auto operator|(NumberBase<T> t, U u) { return NumberBase<decltype(*t | u)>(*t | u); }
+auto operator|(Value<T> t, U u) { return Value<decltype(*t | u)>(*t | u); }
 
 template <typename T, BitOrCompatible<T> U>
-auto operator|(T t, NumberBase<U> u) { return NumberBase<decltype(t | *u)>(t | *u); }
+auto operator|(T t, Value<U> u) { return Value<decltype(t | *u)>(t | *u); }
 
 // ^
 template <typename T, BitXorCompatible<T> U>
-auto operator^(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t ^ *u)>(*t ^ *u); }
+auto operator^(Value<T> t, Value<U> u) { return Value<decltype(*t ^ *u)>(*t ^ *u); }
 
 template <typename T, BitXorCompatible<T> U>
-auto operator^(NumberBase<T> t, U u) { return NumberBase<decltype(*t ^ u)>(*t ^ u); }
+auto operator^(Value<T> t, U u) { return Value<decltype(*t ^ u)>(*t ^ u); }
 
 template <typename T, BitXorCompatible<T> U>
-auto operator^(T t, NumberBase<U> u) { return NumberBase<decltype(t ^ *u)>(t ^ *u); }
+auto operator^(T t, Value<U> u) { return Value<decltype(t ^ *u)>(t ^ *u); }
 
 /*
 ** Logical operators
 */
 // &&
 template <typename T, LogicAndCompatible<T> U>
-auto operator&&(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t && *u)>(*t && *u); }
+auto operator&&(Value<T> t, Value<U> u) { return Value<decltype(*t && *u)>(*t && *u); }
 
 template <typename T, LogicAndCompatible<T> U>
-auto operator&&(NumberBase<T> t, U u) { return NumberBase<decltype(*t && u)>(*t && u); }
+auto operator&&(Value<T> t, U u) { return Value<decltype(*t && u)>(*t && u); }
 
 template <typename T, LogicAndCompatible<T> U>
-auto operator&&(T t, NumberBase<U> u) { return NumberBase<decltype(t && *u)>(t && *u); }
+auto operator&&(T t, Value<U> u) { return Value<decltype(t && *u)>(t && *u); }
 
 // ||
 template <typename T, LogicOrCompatible<T> U>
-auto operator||(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t || *u)>(*t || *u); }
+auto operator||(Value<T> t, Value<U> u) { return Value<decltype(*t || *u)>(*t || *u); }
 
 template <typename T, LogicOrCompatible<T> U>
-auto operator||(NumberBase<T> t, U u) { return NumberBase<decltype(*t || u)>(*t || u); }
+auto operator||(Value<T> t, U u) { return Value<decltype(*t || u)>(*t || u); }
 
 template <typename T, LogicOrCompatible<T> U>
-auto operator||(T t, NumberBase<U> u) { return NumberBase<decltype(t || *u)>(t || *u); }
+auto operator||(T t, Value<U> u) { return Value<decltype(t || *u)>(t || *u); }
 
 // !
 template <LogicNotCompatible T>
-auto operator!(NumberBase<T> t) { return NumberBase<T>(!(*t)); }
+auto operator!(Value<T> t) { return Value<T>(!(*t)); }
 
 /*
 ** Shift operators
 */
 // >>
 template <typename T, ShiftRightCompatible<T> U>
-auto operator>>(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t >> *u)>(*t >> *u); }
+auto operator>>(Value<T> t, Value<U> u) { return Value<decltype(*t >> *u)>(*t >> *u); }
 
 template <typename T, ShiftRightCompatible<T> U>
-auto operator>>(NumberBase<T> t, U u) { return NumberBase<decltype(*t >> u)>(*t >> u); }
+auto operator>>(Value<T> t, U u) { return Value<decltype(*t >> u)>(*t >> u); }
 
 template <typename T, ShiftRightCompatible<T> U>
-auto operator>>(T t, NumberBase<U> u) { return NumberBase<decltype(t >> *u)>(t >> *u); }
+auto operator>>(T t, Value<U> u) { return Value<decltype(t >> *u)>(t >> *u); }
 
 // <<
 template <typename T, ShiftLeftCompatible<T> U>
-auto operator<<(NumberBase<T> t, NumberBase<U> u) { return NumberBase<decltype(*t << *u)>(*t << *u); }
+auto operator<<(Value<T> t, Value<U> u) { return Value<decltype(*t << *u)>(*t << *u); }
 
 template <typename T, ShiftLeftCompatible<T> U>
-auto operator<<(NumberBase<T> t, U u) { return NumberBase<decltype(*t << u)>(*t << u); }
+auto operator<<(Value<T> t, U u) { return Value<decltype(*t << u)>(*t << u); }
 
 template <typename T, ShiftLeftCompatible<T> U>
-auto operator<<(T t, NumberBase<U> u) { return NumberBase<decltype(t << *u)>(t << *u); }
+auto operator<<(T t, Value<U> u) { return Value<decltype(t << *u)>(t << *u); }
 
 } // namespace Croissant

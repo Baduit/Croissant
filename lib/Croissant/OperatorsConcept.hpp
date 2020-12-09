@@ -9,6 +9,17 @@ template <typename T>
 concept NumberBuiltin = std::integral<T> || std::floating_point<T>;
 
 /*
+** Diff
+*/
+
+template <typename T, typename U>
+concept DiffCompatible =
+	requires(T t, U u)
+	{
+		{ t != u };
+	};
+
+/*
 ** Arithmetic operators
 */
 template <typename T, typename U>

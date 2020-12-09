@@ -20,7 +20,11 @@ template <typename T>
 concept NotResult = (!std::is_base_of<ResultTag, T>::value);
 
 
-struct ValueTag {};
+struct ValueTag
+{
+	bool operator==(const ValueTag&) const = default;
+	auto operator<=>(const ValueTag&) const = default;
+};
 
 template <typename T>
 concept IsValue = (std::is_base_of<ValueTag, T>::value);

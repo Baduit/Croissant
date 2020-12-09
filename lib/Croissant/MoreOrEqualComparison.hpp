@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Croissant/Result.hpp>
-#include <Croissant/Value.hpp>
+#include <Croissant/Number.hpp>
 #include <Croissant/UsefulConcepts.hpp>
 
 namespace Croissant
