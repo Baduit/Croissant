@@ -27,7 +27,7 @@ Sometimes I write stuff like the snippet below and even if it does not often hap
 ```Cpp
 if (5 < x && x < 25)
 	; // do stuff
-else (y == x && x == 15)
+else if (y == x && x == 15)
 	// do other stuff
 ```
 Also I wanted to experiment to see if could find a synxtax I like better.
