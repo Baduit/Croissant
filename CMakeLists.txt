@@ -1,13 +1,21 @@
 cmake_minimum_required(VERSION 3.12)
 
-project(Example VERSION 0.1 DESCRIPTION "An example")
+project(CroissantProject VERSION 0.1 DESCRIPTION "Make comparisons great againg !")
+
+option(EXAMPLE "EXAMPLE" ON)
+option(TESTS "TESTS" ON)
 
 set (CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 add_subdirectory(lib)
-add_subdirectory(bin)                    
-                      
-include(CTest)
-include(addTest)
-enable_testing(MAKE_DIRECTORY test)
-add_subdirectory(test)
+
+if (EXAMPLE)
+	add_subdirectory(bin)                    
+endif()
+
+if (TESTS)
+	include(CTest)
+	include(addTest)
+	enable_testing(MAKE_DIRECTORY test)
+	add_subdirectory(test)
+endif()
