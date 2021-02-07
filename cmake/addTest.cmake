@@ -6,7 +6,7 @@ function(addTest test_name test_files)
 	target_compile_options(${test_target}
 						PRIVATE
 						$<$<CXX_COMPILER_ID:MSVC>:/W3 /permissive- /TP>
-						$<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>:-Wextra -Wsign-conversion -Wfloat-equal -pedantic -Wredundant-decls -g>)
+						$<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>:-Wextra -Wall -Wsign-conversion -Wfloat-equal -pedantic -Wredundant-decls -g>)
 	target_link_libraries(${test_target} Croissant)
 	add_test(${test_name} ${test_target})
 endfunction()

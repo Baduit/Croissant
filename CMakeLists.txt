@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 
-project(CroissantProject VERSION 0.1 DESCRIPTION "Make comparisons great againg !")
+project(CroissantProject VERSION 1.2.0 DESCRIPTION "Make comparisons great againg !")
 
 option(EXAMPLE "EXAMPLE" ON)
 option(TESTS "TESTS" ON)

@@ -8,6 +8,8 @@
 
 using namespace boost::ut;
 
+CROISSANT_DISABLE_PARENTHESES_WARNING
+
 void equality()
 {
 	Croissant::Value<int> a(5);

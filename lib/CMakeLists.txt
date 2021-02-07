@@ -9,7 +9,8 @@ target_sources(Croissant INTERFACE
                ${CMAKE_CURRENT_LIST_DIR}/Croissant/Croissant.hpp
                ${CMAKE_CURRENT_LIST_DIR}/Croissant/Result.hpp
                ${CMAKE_CURRENT_LIST_DIR}/Croissant/Tags.hpp
-               ${CMAKE_CURRENT_LIST_DIR}/Croissant/Value.hpp)
+               ${CMAKE_CURRENT_LIST_DIR}/Croissant/Value.hpp
+               ${CMAKE_CURRENT_LIST_DIR}/Croissant/DisableWarning.hpp)
 
 target_compile_features(Croissant INTERFACE cxx_std_20)
 

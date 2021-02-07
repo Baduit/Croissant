@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cassert>
 
+#include <Croissant/DisableWarning.hpp>
 #include <Croissant/EqualityComparison.hpp>
 #include <Croissant/MoreComparison.hpp>
 #include <Croissant/MoreOrEqualComparison.hpp>
