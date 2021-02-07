@@ -4,6 +4,7 @@
 #include <string_view>
 #include <string>
 #include <iostream>
+#include <cassert>
 
 #include <Croissant/EqualityComparison.hpp>
 #include <Croissant/MoreComparison.hpp>
